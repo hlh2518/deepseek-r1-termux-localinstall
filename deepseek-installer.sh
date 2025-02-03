@@ -59,8 +59,8 @@ main() {
     echo "正在安装 $DEB_FILE ..."
      dpkg -i "$DEB_FILE" || {
         echo "检测到依赖问题，尝试自动修复..."
-        sudo apt install -f -y
-        sudo dpkg -i "$DEB_FILE" || {
+         apt install -f -y
+         dpkg -i "$DEB_FILE" || {
             echo "最终安装失败，请检查日志"; 
             exit 1
         }
