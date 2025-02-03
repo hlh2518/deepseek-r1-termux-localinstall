@@ -1,3 +1,5 @@
+#!/bin/bash
+pkg install wget -y
 echo "hshe于2025年2月3日于下关"
 # 配置参数（根据实际情况调整）
 USE_MIRROR="kkgithub.com"    # 首选镜像
