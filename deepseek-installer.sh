@@ -6,7 +6,7 @@ FORCE_SSL_INSECURE="true"    # 强制跳过SSL验证
 USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" # 模拟浏览器
 
 # 目标包信息
-DEB_PATH="/hlh2518/deepseek-r1-termux-localinstalll/blob/main/ollama_0.5.7_aarch64.deb"
+DEB_PATH="/hlh2518/deepseek-r1-termux-localinstall/blob/main/ollama_0.5.7_aarch64.deb"
 DEB_FILE=$(basename "$DEB_PATH")
 
 # 生成镜像URL
@@ -19,7 +19,7 @@ smart_download() {
     local url=$1
     local wget_opts=(
         -t 3               # 重试3次
-        -T 20          # 超时15秒
+        -T 15         # 超时15秒
         -U "$USER_AGENT"   # 模拟浏览器
         --content-disposition
     )
