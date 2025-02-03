@@ -1,6 +1,6 @@
 #!/bin/bash
 pkg install wget -y && pkg update && pkg upgrade
-echo "hshe于2025年2月3日于下关"
+echo "hshe于2025年2月3日"
 # 配置参数（根据实际情况调整）
 USE_MIRROR="kkgithub.com"    # 首选镜像
 FALLBACK_MIRROR="github.com" # 备用镜像
@@ -71,7 +71,7 @@ main() {
     
     sleep 10
 	
-echo "hshe于2025年2月3日于下关"
+echo "hshe于2025年2月3日"
 echo "后台启动ollama serve"
 echo "后台启动ollama..."
 echo "如果存在 nohup.out 文件则删除文件"
