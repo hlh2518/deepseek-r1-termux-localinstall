@@ -1,5 +1,5 @@
 #!/bin/bash
-pkg install wget -y
+pkg install wget -y && pkg update && pkg upgrade
 echo "hshe于2025年2月3日于下关"
 # 配置参数（根据实际情况调整）
 USE_MIRROR="kkgithub.com"    # 首选镜像
@@ -48,8 +48,8 @@ main() {
     # 验证下载
     if [ ! -f "$DEB_FILE" ]; then
         echo "错误：无法下载文件，请检查："
-        echo "1. 网络连接状态"
-        echo "2. 手动访问测试: $primary_url"
+        echo "1.网络连接状态"
+        echo "2.手动访问测试: $primary_url"
         echo "3.稍后重试"
         echo "4.科学上网再试"
         exit 1
@@ -70,6 +70,7 @@ main() {
     dpkg -s ollama | grep Version
     
     sleep 10
+	
 echo "hshe于2025年2月3日于下关"
 echo "后台启动ollama serve"
 echo "后台启动ollama..."
