@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# 设置非交互模式
-export DEBIAN_FRONTEND=noninteractive
-
 echo "hshe于2025年2月3日"
 echo "切换为清华源"
 sleep 10
+
+# 设置非交互模式
+export DEBIAN_FRONTEND=noninteractive
 
 # 修改 sources.list 文件
 sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list
@@ -15,13 +15,19 @@ if [ $? -ne 0 ]; then
 fi
 
 # 更新和升级
-echo "正在执行 apt update && apt upgrade -y"
-apt update && apt upgrade -y
+echo "正在执行 apt update"
+apt update
 if [ $? -ne 0 ]; then
-    echo "警告：apt update && apt upgrade -y 执行失败，但脚本将继续执行。"
-else
-    echo "升级完成..."
+    echo "警告：apt update 执行失败，但脚本将继续执行。"
 fi
+
+echo "正在执行 apt upgrade --assume-yes"
+apt upgrade --assume-yes
+if [ $? -ne 0 ]; then
+    echo "警告：apt upgrade --assume-yes 执行失败，但脚本将继续执行。"
+fi
+
+echo "升级完成..."
 sleep 10
 
 # 配置参数（根据实际情况调整）
