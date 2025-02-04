@@ -7,7 +7,7 @@
 
 
 
-2、执行命令一键安装：curl -fsSL https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek-install.sh | bash
+2、执行命令一键安装：pkg install wget -y && wget https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek-installer.sh && chmod +x deepseek-installer.sh && ./deepseek-installer.sh 
 
 
 
