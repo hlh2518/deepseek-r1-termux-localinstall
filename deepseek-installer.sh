@@ -7,7 +7,7 @@ sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/t
 echo "升级..."
 sleep 10
 apt update -y
-apt upgrade -y
+#apt upgrade -y
 pkg update -y
 pkg upgrade -y
 pkg install wget -y
