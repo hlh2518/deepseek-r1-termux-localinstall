@@ -1,21 +1,28 @@
-#!/bin/bash
-pkg install wget -y && pkg update && pkg upgrade
 echo "hshe于2025年2月3日"
+echo "切换为清华源"
+sleep 15
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && apt update && apt upgrade
+echo "升级..."
+sleep 15
+pkg update 
+pkg upgrade 
+pkg install wget -y
+
+
 # 配置参数（根据实际情况调整）
-USE_MIRROR="kkgithub.com"    # 首选镜像
-FALLBACK_MIRROR="github.com" # 备用镜像
+USE_MIRROR="ghfast.top/https://raw.githubusercontent.com"    # 首选镜像
+#FALLBACK_MIRROR="github.com" # 备用镜像
 FORCE_SSL_INSECURE="true"    # 强制跳过SSL验证
 USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" # 模拟浏览器
 
 # 目标包信息
-#DEB_PATH="/hlh2518/deepseek-r1-termux-localinstall/blob/main/ollama_0.5.7_aarch64.deb"
-DEB_PATH="/termux-user-repository/dists/releases/download/0.1/ollama_0.5.7_aarch64.deb"
-
+DEB_PATH="/hlh2518/deepseek-r1-termux-localinstall/main/ollama_0.5.7_aarch64.deb"
 DEB_FILE=$(basename "$DEB_PATH")
 
 # 生成镜像URL
 build_url() {
-    echo "https://$1$DEB_PATH"
+   echo "https://$1$DEB_PATH"
+    # echo "$1$DEB_PATH"
 }
 
 # 智能下载
@@ -23,19 +30,29 @@ smart_download() {
     local url=$1
     local wget_opts=(
         -t 3               # 重试3次
-        -T 15         # 超时15秒
+        -T 15        # 超时15秒
         -U "$USER_AGENT"   # 模拟浏览器
         --content-disposition
     )
     
     [ "$FORCE_SSL_INSECURE" = "true" ] && wget_opts+=(--no-check-certificate)
     
-    echo "正在尝试下载: $(basename "$url")"
-    if ! wget "${wget_opts[@]}" "$url"; then
-        echo "主镜像下载失败，尝试备用镜像..."
-        local fallback_url=$(build_url "$FALLBACK_MIRROR")
-        wget "${wget_opts[@]}" "$fallback_url"
-    fi
+echo "下载正常启动时用的deepseek.sh脚本"
+sleep 15
+wget "${wget_opts[@]}" "https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek.sh"
+
+chmod +x deepseek.sh
+ echo "deepseek.sh授权成功"
+ echo "重要提示deepseek-r1:1.5b本地部署成功后进行以下步奏:"
+ sleep 15
+ echo "1、重启zerotermux(termu）"
+ echo "2、输入命令./deepseek.sh来启动"
+ sleep 15
+ echo "即将开始安装ollama"
+ sleep 15
+    echo "正在下载: $(basename "$url")"
+    
+    wget "${wget_opts[@]}" "$url"
 }
 
 # 主流程
@@ -59,6 +76,7 @@ main() {
     
     # 安装阶段
     echo "正在安装 $DEB_FILE ..."
+    sleep 15
      dpkg -i "$DEB_FILE" || {
         echo "检测到依赖问题，尝试自动修复..."
          apt install -f -y
@@ -68,11 +86,10 @@ main() {
         }
     }
     
-    echo "安装成功！验证版本："
+    echo "恭喜!ollama安装成功！验证版本："
     dpkg -s ollama | grep Version
     
-    sleep 10
-	
+sleep 15
 echo "hshe于2025年2月3日"
 echo "后台启动ollama serve"
 echo "后台启动ollama..."
@@ -80,16 +97,10 @@ echo "如果存在 nohup.out 文件则删除文件"
 rm -rf nohup.out 
 echo  "启动 ollama serve 脚本"
 nohup ollama serve &
-sleep 10
-echo "安装deepseek-r1:1.5b，并启动"
-ollama run deepseek-r1:1.5b 
- 
- sleep 15
- echo "deepseek-r1:1.5b本地部署成功"
-cp ~/storage/downloads/deepseek.sh .  && chmod +x deepseek.sh
 sleep 15
- echo "重启zerotermux(termux）后输入命令./deepseek.sh来启动"
- sleep 15
+echo "安装deepseek-r1:1.5b，并启动"
+sleep 15
+ollama run deepseek-r1:1.5b 
 }
 
 # 执行主程序
