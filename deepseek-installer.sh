@@ -1,7 +1,10 @@
+#!/bin/bash
 echo "hshe于2025年2月3日"
 echo "切换为清华源"
 sleep 10
-sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && apt update && apt upgrade
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list 
+DEBIAN_FRONTEND=noninteractive apt update 
+DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 echo "升级..."
 sleep 10
 pkg update 
