@@ -31,6 +31,7 @@ smart_download() {
 echo "下载deepseek-installer.sh脚本..."
 sleep 5
 wget "${wget_opts[@]}" "https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek-installer.sh"
+chmod +x deepseek-installer.sh
 echo "切换为清华源"
 sleep 10
 sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && apt update && apt upgrade
