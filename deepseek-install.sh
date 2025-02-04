@@ -1,5 +1,5 @@
 echo "hshe于2025年2月3日"
-
+pkg install wget -y
 # 配置参数（根据实际情况调整）
 USE_MIRROR="ghfast.top/https://raw.githubusercontent.com"    # 首选镜像
 #FALLBACK_MIRROR="github.com" # 备用镜像
@@ -52,8 +52,9 @@ main() {
     fi 
 echo "下载正常启动时用的deepseek-installer.sh脚本"
 sleep 10
-pkg install wget -y
-wget "${wget_opts[@]}" "https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek-installer.sh"
+ echo "正在下载: $(basename "$url")"
+    
+    wget "${wget_opts[@]}" "$url"
 
 chmod +x deepseek-installer.sh
 ./deepseek-installer.sh
