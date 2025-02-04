@@ -1,11 +1,11 @@
 echo "hshe于2025年2月3日"
-echo "切换为清华源"
-sleep 10
-sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && apt update && apt upgrade
-echo "升级..."
-sleep 10
-pkg update 
-pkg upgrade 
+#echo "切换为清华源"
+#sleep 10
+#sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && apt update && apt upgrade
+#echo "升级..."
+#sleep 10
+#pkg update 
+#pkg upgrade 
 
 # 配置参数（根据实际情况调整）
 USE_MIRROR="ghfast.top/https://raw.githubusercontent.com"    # 首选镜像
