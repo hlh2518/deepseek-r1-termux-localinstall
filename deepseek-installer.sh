@@ -1,15 +1,16 @@
 #!/bin/bash
 echo "hshe于2025年2月3日"
-pkg install wget -y
+
 echo "切换为清华源"
 sleep 10
 sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list 
 echo "升级..."
 sleep 10
-apt update 
-apt upgrade 
-pkg update 
-pkg upgrade 
+apt update -y
+apt upgrade -y
+pkg update -y
+pkg upgrade -y
+pkg install wget -y
 
 
 
