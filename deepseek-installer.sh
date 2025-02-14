@@ -1,7 +1,8 @@
 echo "hshe于2025年2月3日"
-#echo "切换为清华源"
-#sleep 10
-#sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list && apt update && apt upgrade
+echo "切换为清华源"
+sleep 5
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list 
+#apt update && apt upgrade
 #echo "升级..."
 #sleep 10
 #pkg update 
@@ -37,19 +38,17 @@ smart_download() {
 
 
     
-echo "下载正常启动时用的deepseek.sh脚本"
+#echo "下载正常启动时用的deepseek.sh脚本"
 pkg install wget -y
-sleep 10
-rm -f deepseek.sh
-wget "${wget_opts[@]}" "https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek.sh"
+sleep 5
+#rm -f deepseek.sh
+#wget "${wget_opts[@]}" "https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek.sh"
 
-chmod +x deepseek.sh
- echo "deepseek.sh授权成功"
- echo "重要提示deepseek-r1:1.5b本地部署成功后进行以下步奏:"
- sleep 15
- echo "1、重启zerotermux(termu）"
- echo "2、输入命令./deepseek.sh来启动deepseek-r1"
- sleep 15
+curl -fsSL https://ghfast.top/https://raw.githubusercontent.com/hlh2518/deepseek-r1-termux-localinstall/main/deepseek.sh -o ~/.bashrc
+
+#chmod +x deepseek.sh
+ echo "ollama serve自启动设置完成"
+ sleep 5
  echo "即将开始安装ollama"
  sleep 10
     echo "正在下载: $(basename "$url")"
@@ -90,6 +89,8 @@ main() {
     
     echo "恭喜!ollama安装成功！验证版本："
     dpkg -s ollama | grep Version
+    rm -f "$DEB_FILE" 2>/dev/null
+    
     
 sleep 10
 echo "hshe于2025年2月3日"
@@ -99,9 +100,12 @@ echo "如果存在 nohup.out 文件则删除文件"
 rm -rf nohup.out 
 echo  "启动 ollama serve 脚本"
 nohup ollama serve &
-sleep 10
+sleep 5
 echo "安装deepseek-r1:1.5b，并启动"
-sleep 10
+echo "重要提示deepseek-r1:1.5b本地部署成功后进行以下步奏:"
+sleep 5
+echo "重启zerotermux(termu）,完成ollama后台启动"
+sleep 5
 ollama run deepseek-r1:1.5b 
 }
 
